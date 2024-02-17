@@ -39,6 +39,8 @@ dependencies:
   get: ^4.6.5
   hexcolor: ^3.0.1
   image_picker: ^1.0.7
+  dio: ^5.4.0
+  get_storage: ^2.1.1
 
 
 

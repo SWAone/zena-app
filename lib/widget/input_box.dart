@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InputBox extends StatelessWidget {
   String hint;
-  InputBox({super.key, this.hint = ''});
+  void Function(String?)? onSaved;
+  InputBox({super.key, this.hint = '', required this.onSaved});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,12 @@ class InputBox extends StatelessWidget {
               BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 4),
             ]),
         child: TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) return "لا يمكن ترك الحقل فارغ";
+
+              return null;
+            },
+            onSaved: onSaved,
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(10),
                 hintText: hint,

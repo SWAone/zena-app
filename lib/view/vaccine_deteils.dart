@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:zena/widget/botom.dart';
-import 'package:zena/widget/row.dart';
 
 class VaccineDeteils extends StatelessWidget {
   String title;
@@ -52,24 +50,11 @@ class VaccineDeteils extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 10.h)),
                     Text(
-                      '''يساعد لقاح التهاب الكبد B في الوقاية من التهاب الكبد B ومضاعفاته (التهاب الكبد المزمن، و تليّف الكبد، و سرطان الكبد).وبشكل عام، التهاب الكبد B أكثر خطورةً من التهاب الكبد A ويكون مميتًا في بعض الأحيان.والأعراض يمكن أن تكون خفيفة إلى شديدة.وتشمل قلة الشهية والغثيان والإرهاق.في 5% إلى 10% من الأشخاص، يُصبح التهاب الكبد B مزمنًا وقد يفضي إلى تليف الكبد وسرطان الكبد.
-        ''',
+                      body,
                       style: TextStyle(
                         fontSize: 17.sp,
                       ),
                     ),
-                    Text(
-                      'الاثار الجانبية',
-                      style: TextStyle(
-                          fontSize: 17.sp, fontWeight: FontWeight.w800),
-                    ),
-                    Padding(padding: EdgeInsets.only(bottom: 10.h)),
-                    Text(
-                      '''في بعض الأحيان، يحدث ألم بموضع الحقن، ويتبعها حُمّى خفيفة.لا يجب إعطاء اللقاح للأشخاص الذين لديهم تاريخ سابق للتعرض لرد فعل تحسسي شديد لخميرة الخبّاز، المستخدمة في إنتاج لقاح التهاب الكبد B. في بعض الأحيان، يحدث ألم بموضع الحقن، ويتبعها حُمّى خفيفة. لا يجب إعطاء اللقاح للأشخاص الذين لديهم تاريخ سابق للتعرض لرد فعل تحسسي شديد لخميرة الخبّاز، المستخدمة في إنتاج لقاح التهاب الكبد B''',
-                      style: TextStyle(
-                        fontSize: 17.sp,
-                      ),
-                    )
                   ],
                 ),
               )

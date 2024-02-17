@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:zena/view/home_screen.dart';
 import 'package:zena/view/login_screen.dart';
 
+final box = GetStorage();
+var login;
 void main() async {
+  await GetStorage.init();
+  login = await box.read('id') ?? 'null';
   runApp(MyApp());
 }
 
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
             },
             // box.read('userinfo') != null ?
 
-            home: LoginScrren(),
+            home: login == null ? LoginScrren() : HomeScreen(),
             theme: ThemeData(
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
                 useMaterial3: true,
