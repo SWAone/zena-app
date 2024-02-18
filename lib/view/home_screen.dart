@@ -1,7 +1,9 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zena/controller/acount.dart';
+import 'package:zena/main.dart';
 import 'package:zena/view/vaccine_deteils.dart';
 import 'package:zena/widget/botom.dart';
 import 'package:zena/widget/row.dart';
@@ -47,10 +49,28 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Image.asset(
-                                    'assets/home_icon/Bell.png',
-                                    width: 40.w,
-                                    height: 40.h,
+                                  GestureDetector(
+                                    onTap: () {
+                                      controller.sendNotfaction();
+                                      controller.isEnableNotfction =
+                                          !controller.isEnableNotfction;
+                                      controller.update();
+                                      Get.snackbar(
+                                          'الاشعارات',
+                                          controller.isEnableNotfction
+                                              ? 'تم تفعيل ارسال الاشعارات'
+                                              : 'تم ايقاف ارسال الاشعارات');
+                                      box.write('notfction',
+                                          controller.isEnableNotfction);
+                                    },
+                                    child: Image.asset(
+                                      'assets/home_icon/Bell.png',
+                                      width: 40.w,
+                                      height: 40.h,
+                                      color: controller.isEnableNotfction
+                                          ? Colors.green
+                                          : Colors.grey,
+                                    ),
                                   )
                                 ],
                               ),
