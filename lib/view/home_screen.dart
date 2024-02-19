@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      controller.sendNotfaction();
+                                      // controller.sendNotfaction();
                                       controller.isEnableNotfction =
                                           !controller.isEnableNotfction;
                                       controller.update();
@@ -157,7 +157,7 @@ class HomeScreen extends StatelessWidget {
                       status ? 'ملقح' : 'لم يلقح',
                       style: TextStyle(
                           fontSize: 17.sp,
-                          color: status == 3 ? Colors.red : Colors.green,
+                          color: !status ? Colors.red : Colors.green,
                           fontWeight: FontWeight.w800),
                       maxLines: 2,
                     ),
