@@ -9,13 +9,15 @@ import 'package:zena/main.dart';
 import 'package:zena/model/child_info.dart';
 import 'package:zena/notfaction_cintroler.dart';
 import 'package:zena/view/home_screen.dart';
+import 'package:zena/view/login_excest.dart';
 import 'package:zena/view/login_screen.dart';
 
 class AcountController extends GetxController {
-  GlobalKey<FormState> acountKey = GlobalKey();
-  GlobalKey<FormState> login = GlobalKey();
+  GlobalKey<FormState> key1 = GlobalKey<FormState>();
+  GlobalKey<FormState> key2 = GlobalKey<FormState>();
 
-  String? name, birthday, phone, pas, phoneL, pasL;
+  String? name, birthday, phone, pas;
+  String? phoneL, pasL;
   ChildInfo? childInfo;
   bool isEnableNotfction = false;
   @override
@@ -36,33 +38,40 @@ class AcountController extends GetxController {
   }
 
   void addChild() async {
-    if (acountKey.currentState!.validate()) {
-      acountKey.currentState!.save();
-      var xd = await HttpMethod.post(path: '/addchild', body: {
-        "name": name,
-        "bd": birthday,
-        "phone_number": phone,
-        "phone_number": phone,
-        "password": pas
-      });
-      if (xd['id'] != null) {
-        print(xd['id']);
-        await box.write('id', xd['id']);
-        var iddd = await box.read('id');
-        print('id $iddd}');
-        print('logoin : $login');
-        update();
-        getData(id: iddd);
+    if (key1.currentState!.validate()) {
+      key1.currentState!.save();
+      RegExp datePattern = RegExp(r'^\d{4}-\d{1,2}-\d{1,2}$');
+      if (datePattern.hasMatch(birthday.toString())) {
+        var xd = await HttpMethod.post(path: '/addchild', body: {
+          "name": name,
+          "bd": birthday,
+          "phone_number": phone,
+          "phone_number": phone,
+          "password": pas
+        });
+        if (xd['id'] != null) {
+          print(xd['id']);
+          await box.write('id', xd['id']);
+          var iddd = await box.read('id');
+          print('id $iddd}');
+          print('logoin : $login');
+          update();
+          getData(id: iddd);
 
-        Get.to(() => HomeScreen());
-        update();
+          Get.to(() => HomeScreen());
+          update();
+        }
+      } else {
+        Get.defaultDialog(
+            title: 'خطا بالتنسيق',
+            content: Text('يجب ان يكون التاريح بهذا النمط 2022-10-10'));
       }
     }
   }
 
   void loginExsett() async {
-    if (login.currentState!.validate()) {
-      login.currentState!.save();
+    if (key2.currentState!.validate()) {
+      key2.currentState!.save();
       print('infooooooo');
       print(pasL);
       print(phoneL);
@@ -99,7 +108,7 @@ class AcountController extends GetxController {
     box.remove('id');
 
     update();
-    Get.offAll(LoginScrren());
+    Get.offAll(LoginExsect());
   }
 
   sendNotfaction({String title = 'title', String body = 'body'}) {

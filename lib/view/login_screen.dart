@@ -21,7 +21,7 @@ class LoginScrren extends StatelessWidget {
               body: Padding(
                 padding: EdgeInsets.only(top: 0.h, left: 40.w, right: 40.w),
                 child: Form(
-                  key: controller.acountKey,
+                  key: controller.key1,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
