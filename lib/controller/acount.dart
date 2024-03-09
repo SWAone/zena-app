@@ -13,11 +13,13 @@ import 'package:zena/view/login_screen.dart';
 
 class AcountController extends GetxController {
   GlobalKey<FormState> acountKey = GlobalKey();
-  String? name, birthday, phone;
+  GlobalKey<FormState> login = GlobalKey();
+
+  String? name, birthday, phone, pas, phoneL, pasL;
   ChildInfo? childInfo;
   bool isEnableNotfction = false;
   @override
-  void onInit() {
+  void onInit() async {
     AwesomeNotifications().setListeners(
       onActionReceivedMethod: NotfactionController.onActionReceivedMethod,
       onNotificationCreatedMethod:
@@ -27,32 +29,67 @@ class AcountController extends GetxController {
       onDismissActionReceivedMethod:
           NotfactionController.onDismissActionReceivedMethod,
     );
-    getData();
-    isEnableNotfction = box.read('notfction') ?? false;
+    var childid = await box.read('id');
+    if (childid != null) getData(id: childid);
+    isEnableNotfction = await box.read('notfction') ?? false;
     super.onInit();
   }
 
   void addChild() async {
-    final Dio dio = new Dio();
     if (acountKey.currentState!.validate()) {
       acountKey.currentState!.save();
       var xd = await HttpMethod.post(path: '/addchild', body: {
         "name": name,
         "bd": birthday,
         "phone_number": phone,
+        "phone_number": phone,
+        "password": pas
       });
       if (xd['id'] != null) {
-        box.write('id', xd['id']);
+        print(xd['id']);
+        await box.write('id', xd['id']);
+        var iddd = await box.read('id');
+        print('id $iddd}');
+        print('logoin : $login');
         update();
+        getData(id: iddd);
+
         Get.to(() => HomeScreen());
         update();
       }
     }
   }
 
-  void getData() async {
-    var result =
-        await HttpMethod.getDataFromApi(path: '/child?id=${login}&token=1');
+  void loginExsett() async {
+    if (login.currentState!.validate()) {
+      login.currentState!.save();
+      print('infooooooo');
+      print(pasL);
+      print(phoneL);
+      try {
+        var xd = await HttpMethod.getDataFromApi(
+            path: '/login?phone_number=$phoneL&password=$pasL');
+        if (xd['child_id'] != null) {
+          await box.write('id', xd['child_id']);
+          var idd = await box.read('id');
+          print('iddd : $idd');
+          getData(id: idd);
+          update();
+          Get.to(() => HomeScreen());
+        } else {
+          Get.defaultDialog(title: 'حدث خطا', content: Text(xd['info']));
+        }
+      } catch (e) {
+        Get.defaultDialog(
+            title: 'حدث خطا',
+            content: Text('رقم الهاتف ام كلمة السر غير صحيحة'));
+      }
+    }
+  }
+
+  void getData({required var id}) async {
+    print('get data id : $id');
+    var result = await HttpMethod.getDataFromApi(path: '/child?id=$id&token=1');
     childInfo = ChildInfo.fromJson(result);
     print(childInfo!.name);
     update();

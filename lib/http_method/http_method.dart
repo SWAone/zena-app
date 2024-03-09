@@ -43,7 +43,6 @@ class HttpMethod {
       var response = await http.get(Uri.parse('$myUrl $path'));
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(utf8.decode(response.bodyBytes));
-        print(jsonData);
         return jsonData;
       } else {
         print('========ايرور========= ${response.statusCode}');

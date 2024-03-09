@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zena/controller/acount.dart';
 import 'package:zena/view/home_screen.dart';
-import 'package:zena/view/login_excest.dart';
+import 'package:zena/view/login_screen.dart';
 import 'package:zena/widget/botom.dart';
 import 'package:zena/widget/input_box.dart';
 
-class LoginScrren extends StatelessWidget {
-  const LoginScrren({super.key});
+class LoginExsect extends StatelessWidget {
+  const LoginExsect({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class LoginScrren extends StatelessWidget {
               body: Padding(
                 padding: EdgeInsets.only(top: 0.h, left: 40.w, right: 40.w),
                 child: Form(
-                  key: controller.acountKey,
+                  key: controller.login,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +30,7 @@ class LoginScrren extends StatelessWidget {
                           child: SizedBox(
                         width: 300.w,
                         child: Text(
-                          'مرحبا بك يسعدنا الاهتمام بطفلك وتنظيم اوقات اللقاحات',
+                          'تسجيل الدخول بحساب موجود',
                           style: TextStyle(fontSize: 20.sp),
                           textAlign: TextAlign.center,
                         ),
@@ -52,25 +52,13 @@ class LoginScrren extends StatelessWidget {
                             children: [
                               InputBox(
                                 onSaved: (p0) {
-                                  controller.name = p0;
-                                },
-                                hint: 'ادخل اسم طفلك',
-                              ),
-                              InputBox(
-                                onSaved: (p0) {
-                                  controller.birthday = p0;
-                                },
-                                hint: 'ماهو تاريخ ميلاده',
-                              ),
-                              InputBox(
-                                onSaved: (p0) {
-                                  controller.phone = p0;
+                                  controller.phoneL = p0;
                                 },
                                 hint: 'رقم هاتف رب الاسرة',
                               ),
                               InputBox(
                                 onSaved: (p0) {
-                                  controller.pas = p0;
+                                  controller.pasL = p0;
                                 },
                                 hint: 'كلمة السر',
                               ),
@@ -80,10 +68,9 @@ class LoginScrren extends StatelessWidget {
                       ),
                       Padding(padding: EdgeInsets.only(top: 30.h)),
                       AppBoton(
-                        titel: 'انشاء حساب الطفل',
+                        titel: 'تسجيل الدخول',
                         onTap: () {
-                          controller.addChild();
-                          // Get.offAll(HomeScreen());
+                          controller.loginExsett();
                         },
                       ),
                       SizedBox(
@@ -91,14 +78,14 @@ class LoginScrren extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => LoginExsect());
+                          Get.to(() => LoginScrren());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('لديك حساب بالفعل'),
+                            Text('ليس لديك حساب'),
                             Text(
-                              ' تسجيل الدخول ',
+                              ' انشاء حساب ',
                               style: TextStyle(color: Colors.blue),
                             )
                           ],

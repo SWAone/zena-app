@@ -11,7 +11,8 @@ final box = GetStorage();
 var login;
 void main() async {
   await GetStorage.init();
-  login = await box.read('id') ?? 'null';
+  login = await box.read('id') ?? -1;
+  print('loginnnnnnnnn $login');
   await AwesomeNotifications().initialize(null, [
     NotificationChannel(
         channelGroupKey: "basic_channel_group",
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
             },
             // box.read('userinfo') != null ?
 
-            home: login == null ? LoginScrren() : HomeScreen(),
+            home: login == -1 ? LoginScrren() : HomeScreen(),
             theme: ThemeData(
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
                 useMaterial3: true,

@@ -49,28 +49,42 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      // controller.sendNotfaction();
-                                      controller.isEnableNotfction =
-                                          !controller.isEnableNotfction;
-                                      controller.update();
-                                      Get.snackbar(
-                                          'الاشعارات',
-                                          controller.isEnableNotfction
-                                              ? 'تم تفعيل ارسال الاشعارات'
-                                              : 'تم ايقاف ارسال الاشعارات');
-                                      box.write('notfction',
-                                          controller.isEnableNotfction);
-                                    },
-                                    child: Image.asset(
-                                      'assets/home_icon/Bell.png',
-                                      width: 40.w,
-                                      height: 40.h,
-                                      color: controller.isEnableNotfction
-                                          ? Colors.green
-                                          : Colors.grey,
-                                    ),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          controller.sginOut();
+                                        },
+                                        icon: Icon(
+                                          Icons.logout,
+                                          size: 26.sp,
+                                          color: Colors.black.withOpacity(0.8),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          // controller.sendNotfaction();
+                                          controller.isEnableNotfction =
+                                              !controller.isEnableNotfction;
+                                          controller.update();
+                                          Get.snackbar(
+                                              'الاشعارات',
+                                              controller.isEnableNotfction
+                                                  ? 'تم تفعيل ارسال الاشعارات'
+                                                  : 'تم ايقاف ارسال الاشعارات');
+                                          box.write('notfction',
+                                              controller.isEnableNotfction);
+                                        },
+                                        child: Image.asset(
+                                          'assets/home_icon/Bell.png',
+                                          width: 40.w,
+                                          height: 40.h,
+                                          color: controller.isEnableNotfction
+                                              ? Colors.green
+                                              : Colors.grey,
+                                        ),
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),
